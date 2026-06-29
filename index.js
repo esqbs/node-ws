@@ -46,13 +46,13 @@ const httpServer = http.createServer((req, res) => {
     return;
   } else if (req.url === `/${SUB_PATH}`) {
     const namePart = NAME ? `${NAME}-${ISP}` : ISP;
-    const vlessURL = `vless://${UUID}@${DOMAIN}:443?encryption=none&security=tls&sni=${DOMAIN}&fp=chrome&type=ws&host=${DOMAIN}&path=%2F${WSPATH}`;
+    const vlessURL = encodeURIComponent(`vless://${UUID}@${DOMAIN}:443?encryption=none&security=tls&sni=${DOMAIN}&fp=chrome&type=ws&host=${DOMAIN}&path=%2F${WSPATH}#${namePart}`);
     const trojanURL = `trojan://${UUID}@${DOMAIN}:443?security=tls&sni=${DOMAIN}&fp=chrome&type=ws&host=${DOMAIN}&path=%2F${WSPATH}#${namePart}`;
     const subscription = vlessURL + '\n' + trojanURL;
     // const base64Content = Buffer.from(subscription).toString('base64');
     
     res.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' });
-    res.end(vlessURL);
+    res.end(velssURL);
   } else {
     res.writeHead(404, { 'Content-Type': 'text/plain' });
     res.end('Not Found\n');
