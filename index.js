@@ -52,7 +52,7 @@ const httpServer = http.createServer((req, res) => {
     // const base64Content = Buffer.from(subscription).toString('base64');
     
     res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end(subscription + '\n');
+    res.end(vlessURL + '\n');
   } else {
     res.writeHead(404, { 'Content-Type': 'text/plain' });
     res.end('Not Found\n');
